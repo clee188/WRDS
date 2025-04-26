@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Minimal Blog</title>
+  <meta name="description" content="A clean and minimal blog layout focused on DEI awareness." />
+  <title>DEI Awareness</title>
   <style>
     body {
       font-family: sans-serif;
@@ -13,53 +14,209 @@
       background: #f4f4f4;
       color: #333;
     }
-    header {
+
+    header, footer {
       background: #fff;
       padding: 1rem 2rem;
-      border-bottom: 1px solid #ddd;
       text-align: center;
+      border-bottom: 1px solid #ddd;
     }
-    .container {
+
+    main {
       max-width: 800px;
       margin: 2rem auto;
       padding: 0 1rem;
     }
+
     article {
       background: #fff;
-      margin-bottom: 2rem;
       padding: 1.5rem;
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
-    h1, h2 {
+
+    article img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+      margin: 1rem 0;
+    }
+
+    h1 {
       margin-top: 0;
     }
+
     footer {
-      text-align: center;
-      padding: 1rem;
+      border-top: 1px solid #ddd;
       font-size: 0.9rem;
       color: #666;
+    }
+
+    .reaction-buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      align-items: center;
+    }
+
+    .reaction-buttons button {
+      background: transparent;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
+      margin: 0 10px;
+      transition: color 0.3s;
+    }
+
+    .reaction-buttons button.liked {
+      color: green;
+    }
+
+    .reaction-buttons button.disliked {
+      color: red;
+    }
+
+    .reaction-buttons span {
+      font-size: 1.2rem;
+      margin-left: 10px;
+    }
+
+    .reaction-buttons button:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    /* Comment section styling */
+    .comment-section {
+      margin-top: 30px;
+    }
+
+    .comment-section textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+
+    .comment-section button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .comment-section button:hover {
+      background-color: #45a049;
+    }
+
+    .comment-list {
+      margin-top: 20px;
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .comment-list li {
+      background: #f9f9f9;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>My Minimal Blog</h1>
+    <h1>DEI Awareness</h1>
   </header>
-  <div class="container">
+
+  <main>
     <article>
-      <h2>First Blog Post</h2>
       <p><small>April 16, 2025</small></p>
-      <p>This is a simple and clean blog layout written in pure HTML and CSS. It's minimal, responsive, and easy to expand.</p>
+      <img src="https://as1.ftcdn.net/v2/jpg/05/44/56/38/1000_F_544563804_FH0LjiA4e6kNKwvNT0t0lhiSub93CuXA.jpg" alt="Abstract minimal design">
+      <p>DEI (more commonly known as Diversity, Equity, and Inclusion) has been under attack from the Trump administration. The reason why it is so important is that it is a broad-based policy that protects vulnerable groups. Getting rid of these DEI policies means a huge underrepresentation for minorities. It means people of different ethnic backgrounds are at risk, people with disabilities are at risk, and employees in general. 
+        Studies find that workplaces with greater diversity seem to benefit their establishments. For example, hospitals with more racial diversity have shown greater patient satisfaction. Moreover, without DEI efforts, minority groups may continue to face barriers in accessing healthcare, education, and housing. Historically, these communities have experienced systemic exclusion from essential services, which DEI programs seek to address. If DEI policies are eliminated, the cycle of inequality that these groups face could become even more entrenched, leading to greater disparities in health outcomes, educational achievement, and economic mobility.
+
+        In conclusion, eliminating DEI policies not only undermines progress in creating inclusive and fair environments, but it also puts at risk the well-being and advancement of vulnerable communities. By maintaining and strengthening these initiatives, society can work toward a more equitable future for all.
+      </p>
+
+      <!-- Sources -->
+      <p><small>For more insights on the elimination of DEI programs and its effects on racial health equity, refer to the <a href="https://www.kff.org/racial-equity-and-health-policy/issue-brief/elimination-of-federal-diversity-initiatives-implications-for-racial-health-equity/" target="_blank">Kaiser Family Foundation issue brief on DEI and health equity</a>.</small></p>
+      <p><small>Image courtesy of <a href="https://www.ftdnet.net/" target="_blank">FTDnet</a>.</small></p>
+
+      <!-- Thumbs Up/Down Buttons -->
+      <div class="reaction-buttons">
+        <button id="thumbs-up" onclick="toggleReaction('like')" >👍</button>
+        <span id="thumbs-up-count">0</span>
+        <button id="thumbs-down" onclick="toggleReaction('dislike')" >👎</button>
+        <span id="thumbs-down-count">0</span>
+      </div>
+
+      <!-- Comment Section -->
+      <div class="comment-section">
+        <button id="comment-btn" onclick="toggleCommentForm()">Add a Comment</button>
+        <div id="comment-form" style="display:none;">
+          <textarea id="comment-text" placeholder="Write your comment..."></textarea><br>
+          <button id="submit-comment" onclick="submitComment()">Submit</button>
+        </div>
+      </div>
+
+      <!-- Comment List -->
+      <ul id="comment-list" class="comment-list"></ul>
     </article>
-    <article>
-      <h2>Another Post</h2>
-      <p><small>April 15, 2025</small></p>
-      <p>Keeping things minimal makes it easier to focus on the content. This layout is perfect for personal blogs or notes.</p>
-    </article>
-  </div>
+  </main>
+
   <footer>
-    <p>&copy; 2025 My Minimal Blog</p>
+    <p>&copy; 2025 DEI Awareness</p>
   </footer>
+
+  <script>
+    let thumbsUpCount = 0;
+    let thumbsDownCount = 0;
+
+    function toggleReaction(reaction) {
+      const thumbsUpButton = document.getElementById('thumbs-up');
+      const thumbsDownButton = document.getElementById('thumbs-down');
+      const thumbsUpCountDisplay = document.getElementById('thumbs-up-count');
+      const thumbsDownCountDisplay = document.getElementById('thumbs-down-count');
+
+      if (reaction === 'like') {
+        thumbsUpButton.classList.add('liked');
+        thumbsDownButton.disabled = true; // Disable thumbs down button after thumbs up click
+        thumbsUpCount++;
+        thumbsUpCountDisplay.textContent = thumbsUpCount;
+        thumbsUpButton.disabled = true; // Disable thumbs up button after click
+      } else if (reaction === 'dislike') {
+        thumbsDownButton.classList.add('disliked');
+        thumbsUpButton.disabled = true; // Disable thumbs up button after thumbs down click
+        thumbsDownCount++;
+        thumbsDownCountDisplay.textContent = thumbsDownCount;
+        thumbsDownButton.disabled = true; // Disable thumbs down button after click
+      }
+    }
+
+    function toggleCommentForm() {
+      const commentForm = document.getElementById('comment-form');
+      commentForm.style.display = commentForm.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function submitComment() {
+      const commentText = document.getElementById('comment-text').value;
+      if (commentText) {
+        const commentList = document.getElementById('comment-list');
+        const newComment = document.createElement('li');
+        newComment.textContent = commentText;
+        commentList.appendChild(newComment);
+        document.getElementById('comment-text').value = ''; // Clear the comment box
+        toggleCommentForm(); // Hide the comment form after submitting
+      } else {
+        alert('Please enter a comment before submitting.');
+      }
+    }
+  </script>
 </body>
 </html>
